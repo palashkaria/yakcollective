@@ -1,0 +1,9 @@
+for testing reasons (and prevent continuous netlify rebuildings)
+the workflows are being tested on tilnow/testbot
+the way it works now is that 
+the workflow "testbranches" runs in the master, but it then exceutes a bash file and then a python file that are in the branch (now abranch, later knack-migration and even later, maybe in the main branch)
+then the script generates an artifact (the mebers.json file)
+the python reads the data from knack
+fixes it up and sends it back to knack to be served
+it send the serving link to a local file which is a commit, which can actually be used to trigger the netlify build
+the python also (well, soon) will read discord data and update the knack if/when needed.
