@@ -30,6 +30,7 @@ module Jekyll
           dt="1/1/2030"
         end
         m["date"]=Time.parse(dt)
+        m["slug"] = m["name"].downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
       end
       site.data[d['data']] = source 
       p site.data["members"][0]
