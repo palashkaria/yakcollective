@@ -35,7 +35,7 @@ Follow us on [Twitter](https://twitter.com/yak_collective), [Facebook](https://w
 	only way to do this would be via a Jekyll plugin, which seems *way*
 	too heavy a solution for such a limited use-case.
 {% endcomment %}
-{% assign current_members = site.members | where_exp: "member", "member.date <= site.time" %}
+{% assign current_members = site.data.members | where_exp: "member", "member.date <= site.time" %}
 {% assign num_members = current_members | size %}
 {% assign random_member = site.time | date: "%Y%m%d" | modulo: num_members %}
 {% assign member = current_members[random_member] %}

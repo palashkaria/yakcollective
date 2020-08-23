@@ -56,7 +56,7 @@
 		(the member "join date"), and `slug` from the `site.members`
 		collection.
 	{% endcomment %}
-	{% assign author = site.members | where: "name", post.author | first %}
+	{% assign author = site.data.members | where: "name", post.author | first %}
 
 	{% comment %}
 		We show posts when `show_author` is falsy OR when it's after the
@@ -77,7 +77,7 @@
 			<a href="{% if post.original_link %}{{ post.original_link }}{% else %}{{ post.url }}{% endif %}">{{ post.title }}</a>
 			{% if include.show_author %}
 				&middot;
-				{% assign author = site.members | where: "name", post.author | first %}
+				{% assign author = site.data.members | where: "name", post.author | first %}
 				<a href="/members/{{ author.slug }}">{{ author.title }}</a>
 			{% endif %}
 			&middot;

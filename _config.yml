@@ -24,11 +24,15 @@ feed_items: 255
 feed_update_period: daily
 feed_update_frequency: 1
 
+get_members:
+  data: members
+  json: 'https://raw.githubusercontent.com/tilnow/testbot/abranch/linktomembers'
+
 # Collections
 #
 collections:
-  members:
-    output: true
+#  members:
+#    output: true
   projects:
     output: true
   sequences:

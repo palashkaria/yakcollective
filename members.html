@@ -13,8 +13,8 @@ title: Yak Collective Members
 		The next two lines randomize the member list. Closes GitHub
 		issue #69. @tilnow
 	{% endcomment %}
-	{% assign num_members = site.members | size %}
-	{% assign members_randomized = site.members | sample: num_members %}
+	{% assign num_members = site.data.members | size %}
+	{% assign members_randomized = site.data.members | sample: num_members %}
 
 	{% comment %}
 		Display member cards for all members whose "join date" (`date`)

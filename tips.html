@@ -16,15 +16,15 @@ title: Yak Collective Consulting Tip
 {% assign num_tips = site.data.tips.tips | size %}
 {% assign random_tip = site.data.tips.tips | sample: 1 %}
 {% assign the_author_slug = random_tip.author %}
-{% assign the_author = site.members | where: "name", the_author_slug | first %}
+{% assign the_author = site.data.members | where: "name", the_author_slug | first %}
 {% assign the_words = random_tip.tip %}
 
 <h1 id="yak-collective-consulting-tip-number">Yak Collective Consulting Tip #{{ the_one }}</h1>
 <p><span id="yak-collective-consulting-tip">{{ the_words }}</span> &mdash; <a href="/members/{{ the_author_slug }}" id="yak-collective-consulting-tip-author">{{ the_author.title }}</a></p>
 
-{% assign last_member = site.members.last %}
+{% assign last_member = site.data.members.last %}
 <script>
-	var members = { {% for member in site.members %}"{{ member.name }}":"{{ member.title }}"{% if member.name != last_member.name %},{% endif %}{% endfor %} };
+	var members = { {% for member in site.data.members %}"{{ member.name }}":"{{ member.title }}"{% if member.name != last_member.name %},{% endif %}{% endfor %} };
 	var tips = {{ site.data.tips | jsonify }};
 	var tips_total = (tips.tips).length;
 	var tip_to_show = Math.floor(Math.random() * tips_total);

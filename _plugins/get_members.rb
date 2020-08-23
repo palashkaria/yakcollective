@@ -3,51 +3,63 @@ require 'json'
 #require 'hash-joiner'
 require 'open-uri'
 require 'date'
+require 'time'
 
-module Jekyll_Get
-  class Generator < Jekyll::Generator
+module Jekyll
+  class MemberGenerator < Generator
     safe true
     priority :highest
 
     def generate(site)
-      config = site.config['jekyll_get']
+     begin
+      puts "reading config"
+      config = site.config['get_members']
       if !config
         return
       end
-      if !config.kind_of?(Array)
-        config = [config]
-      end
-      config.each do |d|
-        begin
-          target = site.data[d['data']]
-          source = JSON.load(open(d['json']))
-#          if target #give up option of overloading as we have trouble getting the hash-joiner in. maybe it means i shoudl delete cache as well...
-#            HashJoiner.deep_merge target, source
-#          else
-#          end # this part removed from original by MF
-            if (d['data'] == "issues")
-                numissues=source[0]['number'].to_i
-                for i in 55..numissues #fudge as going 1-63 gets stuck on 30 due to rate limit #mf
-                    p i
-                    tmp=JSON.load(open(d['json']+"/"+i.to_s+'/reactions',
-    "Accept" =>"application/vnd.github.squirrel-girl-preview+json"))
-                    source[numissues-i]['reactions']= tmp #reverse order because issues provided in reverse order by github
-                end
-                site.data[d['data']] = source #is a readonly after set!?
-#                puts JSON.pretty_generate(site.data['issues'][0])
-
-                      if d['cache']
-                        data_source = (site.config['data_source'] || '_data')
-                        path = "#{data_source}/#{d['data']}.json"
-                        open(path, 'wb') do |file|
-                          file << JSON.generate(site.data[d['data']])
-                        end
-                      end
-            end
-        rescue
-          next
+      d=config
+      p d
+      target = site.data[d['data']] #not really using this - i hard-coded "memebrs", for now
+      f=open(d['json']).read
+      p f
+      source = JSON.load(open(f))
+      p source
+      for m in source do
+        dt=m["date"]
+        if !dt
+          dt="1/1/2030"
         end
+        m["date"]=Time.parse(dt)
+      end
+      site.data[d['data']] = source 
+      p site.data["members"][0]
+      if site.layouts.key? 'member'
+        dir="members"
+        for m in site.data["members"] do
+          newpage=MemberPage.new(site,site.source,dir,m["name"]<<".html",m)
+          site.pages << newpage
+        end
+      end
+      rescue
+       puts "why did i need a rescure?"
+     end
+    end
+  end
+  
+  class MemberPage < Page
+    def initialize(site, base, dir, nm,memberdata)
+
+      @site = site
+      @base = base
+      @dir  = dir
+      @name = nm
+
+      begin 
+          self.process(@name)
+          self.read_yaml(File.join(base, '_layouts'), 'member.html')
+          self.data=memberdata
       end
     end
   end
+
 end

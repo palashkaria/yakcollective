@@ -95,7 +95,7 @@
 {% assign page_image = "/assets/static/yak-og.png" %}
 {% if page.layout == "post" %}
 	{% if page.author %}
-		{% assign member = site.members | where: "name", page.author | first %}
+		{% assign member = site.data.members | where: "name", page.author | first %}
 		{% if member.twitter %}
 			{% assign page_author = member.twitter %}
 		{% endif %}
