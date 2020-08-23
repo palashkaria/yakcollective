@@ -21,9 +21,9 @@ module Jekyll
       p d
       target = site.data[d['data']] #not really using this - i hard-coded "memebrs", for now
       f=open(d['json']).read
-      p f
+      #p f
       source = JSON.load(open(f))
-      p source
+      #p source
       for m in source do
         dt=m["date"]
         if !dt
@@ -34,9 +34,11 @@ module Jekyll
       site.data[d['data']] = source 
       p site.data["members"][0]
       if site.layouts.key? 'member'
-        dir="members"
-        for m in site.data["members"] do
-          newpage=MemberPage.new(site,site.source,dir,m["name"]<<".html",m)
+        dir="members/"
+        newpage=Page.new(site,site.source,dir,"blank.html")
+        site.pages << newpage #without this it uses the last page to give more content. not clear why there is this leak
+        for m in site.data["members"].slice(0,3) do
+          newpage=MemberPage.new(site,site.source,dir,m["name"],m)#<<".md"
           site.pages << newpage
         end
       end
@@ -56,8 +58,12 @@ module Jekyll
 
       begin 
           self.process(@name)
+          self.ext=".md"
           self.read_yaml(File.join(base, '_layouts'), 'member.html')
-          self.data=memberdata
+          self.data=memberdata #self.data.merge!(memberdata) #
+          #p self.content
+          #p self.type
+          #self.data["layout"]=nil
       end
     end
   end
