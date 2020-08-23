@@ -33,12 +33,12 @@ module Jekyll
         m["slug"] = m["name"].downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
       end
       site.data[d['data']] = source 
-      p site.data["members"][0]
+      #p site.data["members"][0]
       if site.layouts.key? 'member'
         dir="members/"
         newpage=Page.new(site,site.source,dir,"blank.html")
         site.pages << newpage #without this it uses the last page to give more content. not clear why there is this leak
-        for m in site.data["members"].slice(0,3) do
+        for m in site.data["members"] do # for testing, add .slice(0,3)
           #newpage=MemberPage.new(site,site.source,dir,m["name"]+".html",m)#
           site.pages << MemberPage.new(site,site.source,dir,m["name"]+".html",m)
         #newpage=Page.new(site,site.source,dir,"blank.html")
