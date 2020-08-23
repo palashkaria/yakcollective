@@ -39,8 +39,11 @@ module Jekyll
         newpage=Page.new(site,site.source,dir,"blank.html")
         site.pages << newpage #without this it uses the last page to give more content. not clear why there is this leak
         for m in site.data["members"].slice(0,3) do
-          newpage=MemberPage.new(site,site.source,dir,m["name"],m)#<<".md"
+          newpage=MemberPage.new(site,site.source,dir,m["name"],m)#
           site.pages << newpage
+        newpage=Page.new(site,site.source,dir,"blank.html")
+        site.pages << newpage #without this it uses the last page to give more content. not clear why there is this leak
+
         end
       end
       rescue
@@ -55,13 +58,19 @@ module Jekyll
       @site = site
       @base = base
       @dir  = dir
-      @name = nm
+      @name = nm <<".md"
 
       begin 
+
           self.process(@name)
-          self.ext=".md"
           self.read_yaml(File.join(base, '_layouts'), 'member.html')
-          self.data=memberdata #self.data.merge!(memberdata) #
+          p self.data
+          self.data=self.data.merge!(memberdata) #memberdata #
+          self.data["title"]=memberdata["title"]
+          self.data["avatar"]=memberdata["avatar"]
+          self.data["tagline"]=memberdata["tagline"]
+          p self.data
+          
           #p self.content
           #p self.type
           #self.data["layout"]=nil
