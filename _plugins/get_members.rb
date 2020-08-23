@@ -39,15 +39,15 @@ module Jekyll
         newpage=Page.new(site,site.source,dir,"blank.html")
         site.pages << newpage #without this it uses the last page to give more content. not clear why there is this leak
         for m in site.data["members"].slice(0,3) do
-          newpage=MemberPage.new(site,site.source,dir,m["name"],m)#
-          site.pages << newpage
-        newpage=Page.new(site,site.source,dir,"blank.html")
+          #newpage=MemberPage.new(site,site.source,dir,m["name"]+".html",m)#
+          site.pages << MemberPage.new(site,site.source,dir,m["name"]+".html",m)
+        #newpage=Page.new(site,site.source,dir,"blank.html")
         site.pages << newpage #without this it uses the last page to give more content. not clear why there is this leak
 
         end
       end
       rescue
-       puts "why did i need a rescure?"
+       puts "why did i need a rescue?"
      end
     end
   end
@@ -58,18 +58,17 @@ module Jekyll
       @site = site
       @base = base
       @dir  = dir
-      @name = nm <<".md"
+      @name = nm 
 
       begin 
 
           self.process(@name)
           self.read_yaml(File.join(base, '_layouts'), 'member.html')
-          p self.data
-          self.data=self.data.merge!(memberdata) #memberdata #
+
+
           self.data["title"]=memberdata["title"]
-          self.data["avatar"]=memberdata["avatar"]
-          self.data["tagline"]=memberdata["tagline"]
-          p self.data
+          self.data["cont"]=memberdata
+
           
           #p self.content
           #p self.type

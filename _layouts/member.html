@@ -13,7 +13,7 @@ layout: minimal
 {% endcomment %}
 <header>
 	<h1 class="yak-post">{{ page.title }}</h1>
-	{% include member-card.html is_link=false member=page %}
+	{% include member-card.html is_link=false member=page.cont %}
 </header>
 
 {% if content %}<section class="yak-post">{{ content }}</section>{% endif %}
@@ -42,12 +42,12 @@ layout: minimal
 {% assign projects_upcoming = "" | split: "" %}
 {% for project in site.projects %}
 	{% if project.date > site.time and site.future != true %}
-		{% if project.lead_editors contains page.name or project.collaborators contains page.name %}
+		{% if project.lead_editors contains page.cont.name or project.collaborators contains page.cont.name %}
 			{% assign projects_upcoming = projects_upcoming | push: project %}
 		{% endif %}
-	{% elsif project.lead_editors contains page.name %}
+	{% elsif project.lead_editors contains page.cont.name %}
 		{% assign projects_lead = projects_lead | push: project %}
-	{% elsif project.collaborators contains page.name %}
+	{% elsif project.collaborators contains page.cont.name %}
 		{% assign projects_collaborated = projects_collaborated | push: project %}
 	{% endif %}
 {% endfor %}
@@ -58,7 +58,7 @@ layout: minimal
 {% endcomment %}
 {% if projects_lead.size > 0 %}
 	<section>
-		<h2 class="yak-post" id="{{ page.name }}-projects-lead">Project Lead On</h2>
+		<h2 class="yak-post" id="{{ page.cont.name }}-projects-lead">Project Lead On</h2>
 		{% for project in projects_lead reversed %}
 			{% include project-box.html is_link=true project=project %}
 		{% endfor %}
@@ -66,7 +66,7 @@ layout: minimal
 {% endif %}
 {% if projects_collaborated.size > 0 %}
 	<section>
-		<h2 class="yak-post" id="{{ page.name }}-projects-lead">Collaborated On</h2>
+		<h2 class="yak-post" id="{{ page.cont.name }}-projects-lead">Collaborated On</h2>
 		{% for project in projects_collaborated reversed %}
 			{% include project-box.html is_link=true project=project %}
 		{% endfor %}
@@ -74,7 +74,7 @@ layout: minimal
 {% endif %}
 {% if projects_upcoming.size > 0 %}
 	<section>
-		<h2 class="yak-post" id="{{ page.name }}-projects-upcoming">Upcoming Projects</h2>
+		<h2 class="yak-post" id="{{ page.cont.name }}-projects-upcoming">Upcoming Projects</h2>
 		{% for project in projects_upcoming reversed %}
 			{% include project-box.html is_link=false project=project %}
 		{% endfor %}
@@ -84,11 +84,11 @@ layout: minimal
 {% comment %}
 	Include any writings for the current member.
 {% endcomment %}
-{% assign writings = site.categories["writings"] | where: "author", page.name %}
-{% assign id_prefix = page.name | append: "-writings" %}
+{% assign writings = site.categories["writings"] | where: "author", page.cont.name %}
+{% assign id_prefix = page.cont.name | append: "-writings" %}
 {% if writings.size > 0 %}
 	<section class="yak-post">
-		<h2 id="{{ page.name }}-writings">Writings</h2>
+		<h2 id="{{ page.cont.name }}-writings">Writings</h2>
 		{% include post-list.html init_header_level=3 id_prefix=id_prefix show_author=false posts=writings %}
 	</section>
 {% endif %}
