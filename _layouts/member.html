@@ -2,6 +2,8 @@
 layout: minimal
 ---
 
+{% assign page.layout=member %}
+{% include head.html %}
 {% comment %}
 	Template for individual member pages; inherits from the "minimal"
 	template. Applied to data files from the `_members` collection.
@@ -18,7 +20,7 @@ layout: minimal
 {% comment %}
 {% if content %}<section class="yak-post">{{ content }}</section>{% endif %}
 {% endcomment %}
-{% include head.html %}
+
 
 {% comment %}
 	Generate a list of projects that the current member (1) was a lead
