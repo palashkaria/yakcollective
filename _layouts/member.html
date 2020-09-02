@@ -5,6 +5,11 @@ layout: minimal
 <style>
 {% include page_for_member.css %}
 </style>
+{% assign page_author = page.cont.twitter %}
+
+{% assign page_image = page.cont.avatar %}
+
+{% assign page.hero_image=page.cont.avatar %}
 
 {% comment %}
 {{  page.layout }}
