@@ -38,8 +38,8 @@
 	The final "else" is just belt-and-suspenders material, and should
 	never be reached during a (non-broken) build.
 {% endcomment %}
-<meta name="description" content="{% if page.summary %}{{ page.summary | truncatewords: 20 | markdownify | strip_html | strip }}{% elsif page.content.length > 0 %}{{ page.content | truncatewords: 20 | strip_html | strip }}{% elsif page.subtitle %}{{ page.subtitle }}{% elsif page.tagline %}{{ page.tagline }}{% elsif site.description %}{{ site.description | truncatewords: 20 | strip }}{% else %}{{ site.name }}{% endif %}">
-<meta name="twitter:description" content="{% if page.summary %}{{ page.summary | truncatewords: 20 | markdownify | strip_html | strip }}{% elsif page.content.length > 0 %}{{ page.content | truncatewords: 20 | strip_html | strip }}{% elsif page.subtitle %}{{ page.subtitle }}{% elsif page.tagline %}{{ page.tagline }}{% elsif site.description %}{{ site.description | truncatewords: 20 | strip }}{% else %}{{ site.name }}{% endif %}">
+<meta name="description" content="{% if page.summary %}{{ page.summary | truncatewords: 20 | markdownify | strip_html | strip }}{% elsif page.content.length > 0 %}{{ page.content | truncatewords: 20 | strip_html | strip }}{% elsif page.subtitle %}{{ page.subtitle }}{% elsif page.cont.tagline %}{{ page.tagline }}{% elsif site.description %}{{ site.description | truncatewords: 20 | strip }}{% else %}{{ site.name }}{% endif %}">
+<meta name="twitter:description" content="{% if page.summary %}{{ page.summary | truncatewords: 20 | markdownify | strip_html | strip }}{% elsif page.content.length > 0 %}{{ page.content | truncatewords: 20 | strip_html | strip }}{% elsif page.subtitle %}{{ page.subtitle }}{% elsif page.cont.tagline %}{{ page.tagline }}{% elsif site.description %}{{ site.description | truncatewords: 20 | strip }}{% else %}{{ site.name }}{% endif %}">
 
 {% comment %}
 	Use page.title, or else site.name, for the page title.
@@ -94,12 +94,12 @@
 {% if page.cont.twitter %}
     {% assign page_author = page.cont.twitter %}
 {% else %}
-    {% assign page_author = "yak_collective" %}
+    {% assign page_author = site.url | append: "yak_collective" %}
 {% endif %}
 {% if page.cont.avatar %}
     {% assign page_image = page.cont.avatar %}
 {% else %}
-    {% assign page_image = "/assets/static/yak-og.png" %}
+    {% assign page_image = site.url | append: "/assets/static/yak-og.png" %}
 {% endif %}
 {% if page.layout == "post" %}
 	{% if page.author %}
@@ -124,8 +124,8 @@
 	{% endif %}
 {% endif %}
 <meta name="twitter:creator" content="@{{ page_author }}">
-<meta name="twitter:image" content="{{ site.url }}{{ page_image }}">
-<meta property="og:image" content="{{ site.url }}{{ page_image }}" />
+<meta name="twitter:image" content="{{ page_image }}">
+<meta property="og:image" content="{{ page_image }}" />
 
 {% comment %}
 	Canonical page URL for Facebook.
