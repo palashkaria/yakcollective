@@ -38,8 +38,8 @@
 	The final "else" is just belt-and-suspenders material, and should
 	never be reached during a (non-broken) build.
 {% endcomment %}
-<meta name="description" content="{% if page.summary %}{{ page.summary | truncatewords: 20 | markdownify | strip_html | strip }}{% elsif page.content.length > 0 %}{{ page.content | truncatewords: 20 | strip_html | strip }}{% elsif page.subtitle %}{{ page.subtitle }}{% elsif page.cont.tagline %}{{ page.tagline }}{% elsif site.description %}{{ site.description | truncatewords: 20 | strip }}{% else %}{{ site.name }}{% endif %}">
-<meta name="twitter:description" content="{% if page.summary %}{{ page.summary | truncatewords: 20 | markdownify | strip_html | strip }}{% elsif page.content.length > 0 %}{{ page.content | truncatewords: 20 | strip_html | strip }}{% elsif page.subtitle %}{{ page.subtitle }}{% elsif page.cont.tagline %}{{ page.tagline }}{% elsif site.description %}{{ site.description | truncatewords: 20 | strip }}{% else %}{{ site.name }}{% endif %}">
+<meta name="description" content="{% if page.cont.tagline %}{{ page.cont.tagline }}{% elsif page.summary %}{{ page.summary | truncatewords: 20 | markdownify | strip_html | strip }}{% elsif page.content.length > 0 %}{{ page.content | truncatewords: 20 | strip_html | strip }}{% elsif page.subtitle %}{{ page.subtitle }}{% elsif site.description %}{{ site.description | truncatewords: 20 | strip }}{% else %}{{ site.name }}{% endif %}">
+<meta name="twitter:description" content="{% if page.cont.tagline %}{{ page.cont.tagline }}{% elsif page.summary %}{{ page.summary | truncatewords: 20 | markdownify | strip_html | strip }}{% elsif page.content.length > 0 %}{{ page.content | truncatewords: 20 | strip_html | strip }}{% elsif page.subtitle %}{{ page.subtitle }}{% elsif site.description %}{{ site.description | truncatewords: 20 | strip }}{% else %}{{ site.name }}{% endif %}">
 
 {% comment %}
 	Use page.title, or else site.name, for the page title.
