@@ -2,9 +2,12 @@
 layout: minimal
 ---
 
-{% assign page.layout=member %}
-{% include head.html %}
+<style>
+{% include page.css %}
+</style>
+
 {% comment %}
+{{  page.layout }}
 	Template for individual member pages; inherits from the "minimal"
 	template. Applied to data files from the `_members` collection.
 {% endcomment %}
