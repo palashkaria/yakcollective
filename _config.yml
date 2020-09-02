@@ -45,7 +45,7 @@ defaults:
       path: "members"
       type: pages
     values:
-      layout: page
+      layout: member
 
 
   - scope:

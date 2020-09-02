@@ -2,16 +2,23 @@
 layout: minimal
 ---
 
-<style>
-{% include page_for_member.css %}
-</style>
 {% assign page_author = page.cont.twitter %}
 
 {% assign page_image = page.cont.avatar %}
 
 {% assign page.hero_image=page.cont.avatar %}
+{% assign page.avatar=page.cont.avatar %}
+
+<style>
+{% include page_for_member.css %}
+</style>
+
 
 {% comment %}
+
+
+
+
 {{  page.layout }}
 	Template for individual member pages; inherits from the "minimal"
 	template. Applied to data files from the `_members` collection.

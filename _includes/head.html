@@ -91,8 +91,16 @@
 	@yak_collective, but set the image to the project `hero_image` (if
 	set).
 {% endcomment %}
-{% assign page_author = "yak_collective" %}
-{% assign page_image = "/assets/static/yak-og.png" %}
+{% if page.cont.twitter %}
+    {% assign page_author = page.cont.twitter %}
+{% else %}
+    {% assign page_author = "yak_collective" %}
+{% endif %}
+{% if page.cont.avatar %}
+    {% assign page_image = page.cont.avatar %}
+{% else %}
+    {% assign page_image = "/assets/static/yak-og.png" %}
+{% endif %}
 {% if page.layout == "post" %}
 	{% if page.author %}
 		{% assign member = site.data.members | where: "name", page.author | first %}
