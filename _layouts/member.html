@@ -15,8 +15,10 @@ layout: minimal
 	<h1 class="yak-post">{{ page.title }}</h1>
 	{% include member-card.html is_link=false member=page.cont %}
 </header>
-
+{% comment %}
 {% if content %}<section class="yak-post">{{ content }}</section>{% endif %}
+{% endcomment %}
+{% include head.html %}
 
 {% comment %}
 	Generate a list of projects that the current member (1) was a lead
