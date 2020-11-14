@@ -18,9 +18,11 @@ h2 {
 h3 {
   @apply text-3xl mb-3 font-medium  text-gray-800;
 }
+
 p {
   @apply mb-4 text-gray-700;
 }
+
 a {
   @apply text-gray-900;
 }
@@ -51,6 +53,7 @@ ol {
 .container {
   @apply max-w-screen-lg px-4 mx-auto w-full;
 }
+
 .row {
   @apply flex flex-wrap;
 }

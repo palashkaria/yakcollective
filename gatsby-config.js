@@ -80,6 +80,12 @@ module.exports = {
         tailwind: true,
       },
     }, // must be after other CSS plugins
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        engines: { yaml: require('./custom-yaml.js') },
+      },
+    },
     'gatsby-plugin-netlify', // make sure to keep it last in the array
   ],
 };
