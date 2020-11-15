@@ -81,19 +81,6 @@ module.exports = {
         tailwind: true,
       },
     }, // must be after other CSS plugins
-    {
-      resolve: 'gatsby-transformer-yaml-full',
-      options: {
-        plugins: [
-          {
-            resolve: 'gatsby-yaml-full-markdown',
-            options: {
-              unwrapSingleLine: true,
-            },
-          },
-        ],
-      },
-    },
     'gatsby-plugin-netlify', // make sure to keep it last in the array
   ],
 };
