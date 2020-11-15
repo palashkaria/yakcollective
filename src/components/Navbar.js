@@ -23,7 +23,7 @@ const Navbar = class extends React.Component {
 
   render() {
     return (
-      <nav className="row items-center justify-between bg-white px-5 py-3 container flex items-center justify-between flex-wrap bg-white px-5 py-3 container lg:flex-row flex-col">
+      <nav className="row items-center justify-between bg-white px-5 py-3 container flex items-center justify-between flex-wrap bg-white px-5 py-3 container md:flex-row flex-col">
         <a href="/" className="mx-3 pr-5">
           <img
             className="bg-black"
@@ -32,11 +32,11 @@ const Navbar = class extends React.Component {
             style={{ width: '35px', height: '35px' }}
           />
         </a>
-        <div className={`lg:ml-auto flex items-center w-auto`}>
+        <div className={`md:ml-auto flex items-center w-auto`}>
           <div className="text-center">
             {items.map((item) => (
               <Link
-                className="inline-block mr-4 py-2 mt-0 py-0 text-gray-800 text-left text-lg"
+                className="inline-block mr-4 py-2 mt-0 py-0 text-gray-800 text-left text-base"
                 to={item.path}
                 key={item.path}
               >

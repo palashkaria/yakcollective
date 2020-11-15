@@ -8,10 +8,12 @@ import BlogRoll from '../components/BlogRoll';
 import RenderHTML from '../components/RenderHTML';
 
 export const IndexPageTemplate = ({ mainpitch }) => (
-  <section className="">
+  <section>
     <div className="container">
-      <h1 className="title text-5xl">{mainpitch.title}</h1>
-      <RenderHTML>{mainpitch.description}</RenderHTML>
+      <h1 className="title md:text-5xl text-3xl">{mainpitch.title}</h1>
+      <RenderHTML className="md:text-xl text-base">
+        {mainpitch.description}
+      </RenderHTML>
     </div>
   </section>
 );
